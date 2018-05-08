@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="sudokuChart.css">
+  <script src="board.js"></script>
+</head>
+<body>
+  <div id="sudoku">
+    <div id="topLeft">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="00">
+          </td>
+          <td class="tdRightBorder" id="01">
+          </td>
+          <td id="02">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="10">
+          </td>
+          <td class="tdRightBorder" id="11">
+          </td>
+          <td id="12">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="20">
+          </td>
+          <td class="tdRightBorder" id="21">
+          </td>
+          <td id="22">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="topMiddle">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="03">
+          </td>
+          <td class="tdRightBorder" id="04">
+          </td>
+          <td id="05">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="13">
+          </td>
+          <td class="tdRightBorder" id="14">
+          </td>
+          <td id="15">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="23">
+          </td>
+          <td class="tdRightBorder" id="24">
+          </td>
+          <td id="25">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="topRight">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="06">
+          </td>
+          <td class="tdRightBorder" id="07">
+          </td>
+          <td id="08">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="16">
+          </td>
+          <td class="tdRightBorder" id="17">
+          </td>
+          <td id="18">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="26">
+          </td>
+          <td class="tdRightBorder" id="27">
+          </td>
+          <td id="28">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="middleLeft">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="30">
+          </td>
+          <td class="tdRightBorder" id="31">
+          </td>
+          <td id="32">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="40">
+          </td>
+          <td class="tdRightBorder" id="41">
+          </td>
+          <td id="42">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="50">
+          </td>
+          <td class="tdRightBorder" id="51">
+          </td>
+          <td id="52">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="middleMiddle">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="33">
+          </td>
+          <td class="tdRightBorder" id="34">
+          </td>
+          <td id="35">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="43">
+          </td>
+          <td class="tdRightBorder" id="44">
+          </td>
+          <td id="45">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="53">
+          </td>
+          <td class="tdRightBorder" id="54">
+          </td>
+          <td id="55">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="middleRight">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="36">
+          </td>
+          <td class="tdRightBorder" id="37">
+          </td>
+          <td id="38">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="46">
+          </td>
+          <td class="tdRightBorder" id="47">
+          </td>
+          <td id="48">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="56">
+          </td>
+          <td class="tdRightBorder" id="57">
+          </td>
+          <td id="58">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="bottomLeft">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="60">
+          </td>
+          <td class="tdRightBorder" id="61">
+          </td>
+          <td id="62">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="70">
+          </td>
+          <td class="tdRightBorder" id="71">
+          </td>
+          <td id="72">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="80">
+          </td>
+          <td class="tdRightBorder" id="81">
+          </td>
+          <td id="82">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="bottomMiddle">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="63">
+          </td>
+          <td class="tdRightBorder" id="64">
+          </td>
+          <td id="65">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="73">
+          </td>
+          <td class="tdRightBorder" id="74">
+          </td>
+          <td id="75">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="83">
+          </td>
+          <td class="tdRightBorder" id="84">
+          </td>
+          <td id="85">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="bottomRight">
+      <table>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="66">
+          </td>
+          <td class="tdRightBorder" id="67">
+          </td>
+          <td id="68">
+          </td>
+        </tr>
+        <tr class="trBottomBorder">
+          <td class="tdRightBorder" id="76">
+          </td>
+          <td class="tdRightBorder" id="77">
+          </td>
+          <td id="78">
+          </td>
+        </tr>
+        <tr>
+          <td class="tdRightBorder" id="86">
+          </td>
+          <td class="tdRightBorder" id="87">
+          </td>
+          <td id="88">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  generateCellClasses();
+  var sudokuBoard = new Board();
+  
+
+
+</script>
+
+</html>
