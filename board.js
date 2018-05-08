@@ -1,30 +1,26 @@
-function generateCellClasses(){
-  for (var x = 0; x <= 8; x++) {
-    for (var y = 0; y <= 8; y++) {
-      var className = "cell" + x + y;
-      this[className] = new Cell(x,y);
-    }
-  }
-}
-
 class Board {
   constructor(){
   }
 
-  initialSetup(x,y) { //Fill three diagonal boxes
-    // topLeftCell = "" + x + y;
-    // do {
-    //   cellName = "cell" + x + y;
-    //   tdCell = document.getElementById(topLeftCell)
-    //   this[cellName].generateNum();
-    //   this[cellName].populate();
-    // } while(cellNum <= 9);
+  generateCellClasses(){
+    for (var x = 0; x <= 8; x++) {
+      for (var y = 0; y <= 8; y++) {
+        var className = "cell" + x + y;
+        this[className] = new Cell(x,y);
+      }
+    }
+  }
 
-    topLeftCell = "" + x + y;
-    cellName = "cell" + x + y;
-    tdCell = document.getElementById(topLeftCell)
-    this[cellName].generateNum();
-    this[cellName].populate();
+  fillFirstThreeBoxes() { //Fill three diagonal boxes
+    var boxesToFill = [['cell',0,0],['cell',3,3],['cell',6,6]]
+    var numOfBoxes = boxesToFill.length;
+    for (var i = 0; i <= numOfBoxes; i++;){
+      for (var y = 0; y < 3; y++){
+        for (var x = 0; x < 3; x++){
+          
+        }
+      }
+    }
   }
 
   notify(cellName, numberToRemove) { //tell all conflicting cells to remove populated number
@@ -42,6 +38,10 @@ class Board {
       }
       console.log(cellName.availableNumList());
     }
+  }
+
+  cell(x,y) {
+    return this["cell" + x + y];
   }
 }
 
