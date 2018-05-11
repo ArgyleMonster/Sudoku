@@ -8,7 +8,6 @@ class Board {
       for (var y = 0; y <= 8; y++) {
         var cellName = "cell" + x + y;
         this.cellList.cellName = new Cell(x,y);
-        console.log(this.cellList.cellName);
       }
     }
   }
@@ -28,13 +27,18 @@ class Board {
   }
 
   fillBox(x,y){
-    var topLeftCell = this.topLeftCell(x,y);
-    var topLeftCellX = topLeftCell.charAt(0);
+    var topLeftCell = String(this.topLeftCell(x,y));
+    console.log(topLeftCell.length);
+    var topLeftCellX = topLeftCell.charAt(0);   
     var topLeftCellY = topLeftCell.charAt(1);
+    console.log(topleftCellX);
+    console.log(topleftCellY); 
+    var boxlength = topLeftCellX + 3;
+    var boxheight = topLeftCellY + 3;
     for (this.y = topLeftCellY; y < 3; this.y++){
       for (this.x = topLeftCellX; x < 3; this.x++){
-          var currentCell = this.cell(this.x,this.y);
-          console.log(currentCell);
+          var currentCell = this.cellList['cell' + this.x + this.y];
+          console.log('hello');
       }
     }
   }
