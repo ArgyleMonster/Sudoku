@@ -1,15 +1,19 @@
 class Board {
   constructor(){
     this.cellList = {};
+    console.log(this.cellList);
   }
 
   generateCellClasses(){
     for (var x = 0; x <= 8; x++) {
       for (var y = 0; y <= 8; y++) {
         var cellName = "cell" + x + y;
-        this.cellList.cellName = new Cell(x,y);
+        this.cellList[cellName] = new Cell(x,y);
       }
     }
+    var a = 3;
+    var b = 4;
+
   }
 
   fillFirstThreeBoxes() { //Fill three diagonal boxes
@@ -20,27 +24,23 @@ class Board {
       for (var y = boxesToFill[0][2]; y < yOriginal + 3; y++){
         for (var x = boxesToFill[0][1]; x < 3; x++){
           var currentCell = this.cell(x,y);
-          console.log(currentCell);
         }
       }
     }
   }
 
   fillBox(x,y){
-    var topLeftCell = String(this.topLeftCell(x,y));
-    console.log(topLeftCell.length);
-    var topLeftCellX = topLeftCell.charAt(0);   
-    var topLeftCellY = topLeftCell.charAt(1);
-    console.log(topleftCellX);
-    console.log(topleftCellY); 
-    var boxlength = topLeftCellX + 3;
-    var boxheight = topLeftCellY + 3;
-    for (this.y = topLeftCellY; y < 3; this.y++){
-      for (this.x = topLeftCellX; x < 3; this.x++){
-          var currentCell = this.cellList['cell' + this.x + this.y];
-          console.log('hello');
-      }
-    }
+    // console.log('1');
+    // var topLeftCell = String(this.topLeftCell(x,y));
+    // var boxlength = topLeftCell[0] + 3;
+    // var boxheight = topLeftCell[1] + 3;
+    // for (var y = 0; y < 3; y++){
+    //   console.log('2');
+    //   for (var x = 0; x < 3; x++){
+    //       var currentCell = this.cellList['cell' + x + y];
+    //       console.log(currentCell);
+    //   }
+    // }
   }
 
   notify(cellName, numberToRemove) { //tell all conflicting cells to remove populated number
@@ -60,7 +60,7 @@ class Board {
     }
   }
 
-  topLeftCell(x,y){ // returns two digit number (ie. 66)
+  topLeftCell(x,y){ // returns list of two numbers ie [3,6]
     this.x = x;
     this.y = y;
     var foundX = false;
@@ -82,15 +82,15 @@ class Board {
         }
       }
     }
-    return "" + this.x + this.y;
+    return [this.x, this.y]
   }
 
 }
 
-class Cell extends Board {
+class Cell {
   constructor(x,y){
     var cellNum; //final generated number for the cell
-    super(cellNum);
+    // super(cellNum);
     this.availableNumList = [1,2,3,4,5,6,7,8,9];
     this.cellID = "" + x + y;
     this.htmlTD = document.getElementById(this.cellID);
