@@ -1,7 +1,5 @@
 class Board {
   constructor(){
-    this.cellList = {};
-    console.log(this.cellList);
   }
 
   generateCellClasses(){
@@ -11,9 +9,6 @@ class Board {
         this.cellList[cellName] = new Cell(x,y);
       }
     }
-    var a = 3;
-    var b = 4;
-
   }
 
   fillFirstThreeBoxes() { //Fill three diagonal boxes
