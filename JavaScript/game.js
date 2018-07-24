@@ -1,5 +1,5 @@
 boardCells = [] //contains instance of all cells
-buildLog = [] // log of all steps taken to create a sudoku
+buildLog = [] // log of all steps taken to create a sudoku [<cellName>,<num>]
 
 function createCells () {
   // Create instances of each cell on the board
@@ -14,19 +14,19 @@ function createCells () {
 }
 
 class Board {
-  notify(cellObj, numberToNotify) {
+  notifyRemove(cellObj, numberToRemove) {
     //tell adjacent cells to remove a number from available numbers list
     this.xCoord = cellObj.returnCoords()[0]
     this.yCoord = cellObj.returnCoords()[1]
 
     //Tell all cells in the row
     for (let x = 0; x < 9; x++){
-      boardCells['cell' + x + this.yCoord].removeNumber(numberToNotify)
+      boardCells['cell' + x + this.yCoord].removeNumber(numberToRemove)
     }
 
     //Tell all cells in the collumn
     for (let y = 0; y < 9; y++){
-      boardCells['cell' + this.xCoord + y].removeNumber(numberToNotify)
+      boardCells['cell' + this.xCoord + y].removeNumber(numberToAdd)
     }
 
     //Tell all cells in the box
@@ -35,7 +35,36 @@ class Board {
     this.topLeftY = this.topLeftCoords[1]
     for (let y = 0; y < 3; y++){
       for (let x = 0; x < 3; x++){
-        boardCells['cell' + this.topLeftX + this.topLeftY].removeNumber(numberToNotify)
+        boardCells['cell' + this.topLeftX + this.topLeftY].removeNumber(numberToAdd)
+        this.topLeftX++
+      }
+      this.topLeftY++
+      this.topLeftX = this.topLeftX - 3
+    }
+  }
+
+  notifyAdd(cellObj, numberToAdd) {
+    //tell adjacent cells to add a number to available numbers list
+    this.xCoord = cellObj.returnCoords()[0]
+    this.yCoord = cellObj.returnCoords()[1]
+
+    //Tell all cells in the row
+    for (let x = 0; x < 9; x++){
+      boardCells['cell' + x + this.yCoord].addNumber(numberToAdd)
+    }
+
+    //Tell all cells in the collumn
+    for (let y = 0; y < 9; y++){
+      boardCells['cell' + this.xCoord + y].addNumber(numberToAdd)
+    }
+
+    //Tell all cells in the box
+    this.topLeftCoords = cellObj.returnBoxTopLeftCoords();
+    this.topLeftX = this.topLeftCoords[0]
+    this.topLeftY = this.topLeftCoords[1]
+    for (let y = 0; y < 3; y++){
+      for (let x = 0; x < 3; x++){
+        boardCells['cell' + this.topLeftX + this.topLeftY].addNumber(numberToAdd)
         this.topLeftX++
       }
       this.topLeftY++
@@ -105,12 +134,20 @@ class Cell extends Board{
     }
   }
 
+  addNumber(numberToAdd){
+    // add a number to availableNumList for this cell
+    let location = this.availableNumList.indexOf(numberToAdd);
+    if (location == -1) {
+      this.availableNumList.push(numberToAdd);
+    }
+  }
+
   chooseNumber(){
     // Pick a number from availableNumList and set it as the cells number
     if (this.availableNumList.length > 0){
       let numToSet = this.returnRandomPossibleNumber()
       this.cellNumber = numToSet
-      Board.prototype.notify(boardCells['cell' + this.xCoord + this.yCoord],numToSet)
+      Board.prototype.notifyRemove(boardCells['cell' + this.xCoord + this.yCoord],numToSet)
     }
     else {
       // No numbers are availabe for this cell will have to start over!!!!
@@ -135,6 +172,6 @@ class Cell extends Board{
 
 
 // Run Code
-createCells();
+createCells()
 
 let sudoku = new Board();
