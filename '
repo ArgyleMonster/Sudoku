@@ -1,5 +1,4 @@
 boardCells = [] //contains instance of all cells
-buildLog = [] // log of all steps taken to create a sudoku
 
 function createCells () {
   // Create instances of each cell on the board
@@ -43,6 +42,26 @@ class Board {
     }
   }
 
+  fillBox(cellInBox){
+    // cellInBox should be in format: 'cell02'
+    let topLeftCell = boardCells[cellInBox].returnBoxTopLeftCoords()
+    let startCell = boardCells['cell' + topLeftCell[0] + topLeftCell[1]]
+    console.log(boardCells[cellInBox].returnBoxTopLeftCoords())
+    for (let x = 0; x < 3; x++){
+      for (let y = 0; y < 3; y++){
+        boardCells['cell' + x + y].chooseNumber()
+        boardCells['cell' + x + y].displayNumber()
+      }
+    }
+  }
+
+  fillFirstThreeBoxes(){
+    // fill the three diagonal boxes since no numbers will be conflicting
+    this.fillBox('cell00')
+    this.fillBox('cell33')
+    this.fillBox('cell66')
+  }
+
   clearBoard(){
     // reset the board to blank and clear cells
     for (let x = 0; x <= 8; x++){
@@ -50,9 +69,6 @@ class Board {
         boardCells['cell' + x + y].reset()
       }
     }
-  }
-
-  createSudoku(){
   }
 }
 
@@ -123,7 +139,6 @@ class Cell extends Board{
     }
     else {
       this.HTMLcell.innerHTML = 'X'
-
     }
   }
 
@@ -138,3 +153,13 @@ class Cell extends Board{
 createCells();
 
 let sudoku = new Board();
+
+sudoku.fillFirstThreeBoxes()
+
+// -- fill all cell with random number
+// for (let x = 0; x <= 8; x++){
+//   for (let y = 0; y <= 8; y++){
+//     boardCells['cell' + x + y].chooseNumber()
+//     boardCells['cell' + x + y].displayNumber()
+//   }
+// }

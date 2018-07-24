@@ -1,67 +1,39 @@
 * {
+    --box-border-color: black;
+    --box-border-size: 3px;
+    --cell-border-color: grey;
+    --cell-border-size: 2px;
+}
+
+.board {
   border-collapse: collapse;
-  border-spacing: 0;
-  margin: 0;
-  padding: 0;
 }
 
-body, html {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+tr {
+  border: var(--cell-border-size) solid var(--cell-border-color);
+  border-collapse: collapse;
+  height: 55px;
+
 }
 
-#sudoku {
-  width: 80vw;
-  height: 80vw;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  margin-top: 40px; /*header*/
+td {
+  border: var(--cell-border-size) solid var(--cell-border-color);
+  border-collapse: collapse;
+  width: 50px;
 }
 
-#sudoku div {
-  width: calc(100% / 3);
-  height: calc(100% / 3);
-  position: relative;
+.upperborder {
+  border-top: var(--box-border-size) solid var(--box-border-color);
 }
 
-#sudoku div table {
-  width: 100%;
-  height: 100%;
+.rightborder {
+  border-right: var(--box-border-size) solid var(--box-border-color);
 }
 
-#sudoku div table tr {
-  height: calc(100% / 3);
-  width: 100%;
+.leftborder {
+  border-left: var(--box-border-size) solid var(--box-border-color);
 }
 
-#sudoku div table tr td {
-  text-align: center;
-  font-size: 2em;
-  height: calc(100% / 3);
-  width: calc(100% / 3);
-}
-
-#topLeft table, #topRight table, #bottomLeft table, #bottomRight table {
-  border: 2px solid black;
-}
-
-#topMiddle table, #bottomMiddle table {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-}
-
-#middleLeft table, #middleRight table {
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-}
-
-.trBottomBorder {
-  border-bottom: 1px solid lightgrey;
-}
-
-.tdRightBorder {
-  border-right: 1px solid lightgrey;
+.bottomborder {
+  border-bottom: var(--box-border-size) solid var(--box-border-color);
 }

@@ -1,283 +1,112 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="sudokuChart.css">
-  <script src="board.js"></script>
 </head>
 <body>
-  <div id="sudoku">
-    <div id="topLeft">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="00">
-          </td>
-          <td class="tdRightBorder" id="01">
-          </td>
-          <td id="02">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="10">
-          </td>
-          <td class="tdRightBorder" id="11">
-          </td>
-          <td id="12">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="20">
-          </td>
-          <td class="tdRightBorder" id="21">
-          </td>
-          <td id="22">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="topMiddle">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="03">
-          </td>
-          <td class="tdRightBorder" id="04">
-          </td>
-          <td id="05">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="13">
-          </td>
-          <td class="tdRightBorder" id="14">
-          </td>
-          <td id="15">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="23">
-          </td>
-          <td class="tdRightBorder" id="24">
-          </td>
-          <td id="25">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="topRight">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="06">
-          </td>
-          <td class="tdRightBorder" id="07">
-          </td>
-          <td id="08">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="16">
-          </td>
-          <td class="tdRightBorder" id="17">
-          </td>
-          <td id="18">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="26">
-          </td>
-          <td class="tdRightBorder" id="27">
-          </td>
-          <td id="28">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="middleLeft">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="30">
-          </td>
-          <td class="tdRightBorder" id="31">
-          </td>
-          <td id="32">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="40">
-          </td>
-          <td class="tdRightBorder" id="41">
-          </td>
-          <td id="42">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="50">
-          </td>
-          <td class="tdRightBorder" id="51">
-          </td>
-          <td id="52">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="middleMiddle">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="33">
-          </td>
-          <td class="tdRightBorder" id="34">
-          </td>
-          <td id="35">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="43">
-          </td>
-          <td class="tdRightBorder" id="44">
-          </td>
-          <td id="45">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="53">
-          </td>
-          <td class="tdRightBorder" id="54">
-          </td>
-          <td id="55">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="middleRight">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="36">
-          </td>
-          <td class="tdRightBorder" id="37">
-          </td>
-          <td id="38">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="46">
-          </td>
-          <td class="tdRightBorder" id="47">
-          </td>
-          <td id="48">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="56">
-          </td>
-          <td class="tdRightBorder" id="57">
-          </td>
-          <td id="58">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="bottomLeft">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="60">
-          </td>
-          <td class="tdRightBorder" id="61">
-          </td>
-          <td id="62">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="70">
-          </td>
-          <td class="tdRightBorder" id="71">
-          </td>
-          <td id="72">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="80">
-          </td>
-          <td class="tdRightBorder" id="81">
-          </td>
-          <td id="82">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="bottomMiddle">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="63">
-          </td>
-          <td class="tdRightBorder" id="64">
-          </td>
-          <td id="65">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="73">
-          </td>
-          <td class="tdRightBorder" id="74">
-          </td>
-          <td id="75">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="83">
-          </td>
-          <td class="tdRightBorder" id="84">
-          </td>
-          <td id="85">
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="bottomRight">
-      <table>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="66">
-          </td>
-          <td class="tdRightBorder" id="67">
-          </td>
-          <td id="68">
-          </td>
-        </tr>
-        <tr class="trBottomBorder">
-          <td class="tdRightBorder" id="76">
-          </td>
-          <td class="tdRightBorder" id="77">
-          </td>
-          <td id="78">
-          </td>
-        </tr>
-        <tr>
-          <td class="tdRightBorder" id="86">
-          </td>
-          <td class="tdRightBorder" id="87">
-          </td>
-          <td id="88">
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
+  <table class='board'>
+  <tr>
+    <td id='00' class='leftborder upperborder'></td>
+    <td id='01' class='upperborder'></td>
+    <td id='02' class='rightborder upperborder'></td>
+    <td id='03' class='upperborder'></td>
+    <td id='04' class='upperborder'></td>
+    <td id='05' class='rightborder upperborder'></td>
+    <td id='06' class='upperborder'></td>
+    <td id='07' class='upperborder'></td>
+    <td id='08' class='rightborder upperborder'></td>
+  </tr>
+  <tr>
+    <td id='10' class="leftborder"></td>
+    <td id='11' ></td>
+    <td id='12' class='rightborder'></td>
+    <td id='13' ></td>
+    <td id='14' ></td>
+    <td id='15' class='rightborder'></td>
+    <td id='16'></td>
+    <td id='17'></td>
+    <td id='18' class="rightborder"></td>
+  </tr>
+  <tr>
+    <td id='20' class="leftborder"></td>
+    <td id='21'></td>
+    <td id='22' class='rightborder'></td>
+    <td id='23'></td>
+    <td id='24'></td>
+    <td id='25' class='rightborder'></td>
+    <td id='26'></td>
+    <td id='27'></td>
+    <td id='28' class="rightborder"></td>
+  </tr>
+  <tr>
+    <td id='30' class='leftborder upperborder'></td>
+    <td id='31' class='upperborder'></td>
+    <td id='32' class='upperborder rightborder'></td>
+    <td id='33' class='upperborder'></td>
+    <td id='34' class='upperborder'></td>
+    <td id='35' class='upperborder rightborder'></td>
+    <td id='36' class='upperborder'></td>
+    <td id='37' class='upperborder'></td>
+    <td id='38' class='rightborder upperborder'></td>
+  </tr>
+  <tr>
+    <td id='40' class="leftborder"></td>
+    <td id='41'></td>
+    <td id='42' class='rightborder'></td>
+    <td id='43'></td>
+    <td id='44'></td>
+    <td id='45' class='rightborder'></td>
+    <td id='46'></td>
+    <td id='47'></td>
+    <td id='48' class="rightborder"></td>
+  </tr>
+  <tr>
+    <td id='50' class="leftborder"></td>
+    <td id='51'></td>
+    <td id='52' class='rightborder'></td>
+    <td id='53'></td>
+    <td id='54'></td>
+    <td id='55' class='rightborder'></td>
+    <td id='56'></td>
+    <td id='57'></td>
+    <td id='58' class="rightborder"></td>
+  </tr>
+  <tr>
+    <td id='60' class='leftborder upperborder'></td>
+    <td id='61' class='upperborder'></td>
+    <td id='62' class='upperborder rightborder'></td>
+    <td id='63' class='upperborder'></td>
+    <td id='64' class='upperborder'></td>
+    <td id='65' class='upperborder rightborder'></td>
+    <td id='66' class='upperborder'></td>
+    <td id='67' class='upperborder'></td>
+    <td id='68' class='rightborder upperborder'></td>
+  </tr>
+  <tr>
+    <td id='70' class="leftborder"></td>
+    <td id='71'></td>
+    <td id='72'class='rightborder'></td>
+    <td id='73'></td>
+    <td id='74'></td>
+    <td id='75'class='rightborder'></td>
+    <td id='76'></td>
+    <td id='77'></td>
+    <td id='78'class="rightborder"></td>
+  </tr>
+  <tr>
+    <td id='80'class="leftborder bottomborder"></td>
+    <td id='81'class="bottomborder"></td>
+    <td id='82'class='rightborder bottomborder'></td>
+    <td id='83'class="bottomborder"></td>
+    <td id='84'class="bottomborder"></td>
+    <td id='85'class='rightborder bottomborder'></td>
+    <td id='86'class="bottomborder"></td>
+    <td id='87'class="bottomborder"></td>
+    <td id='88'class="rightborder bottomborder"></td>
+  </tr>
+  </table>
 
+  <!-- Import JavaScript to control the board -->
+  <script src='../JavaScript/game.js'></script>
 </body>
-
-<script>
-  var sudokuBoard = new Board();
-  sudokuBoard.generateCellClasses();
-  sudokuBoard.fillBox(5,7);
-
-  // var testDir = {};
-  // testDir.name = 'hello';
-  // console.log(testDir);
-  //
-  // function testFunc(entry, data){
-  //   testDir[entry] = data;
-  //   console.log(testDir);
-  // }
-  //
-  // testFunc('bla', 'goodbye');
-
-</script>
-
 </html>
