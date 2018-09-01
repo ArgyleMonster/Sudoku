@@ -90,47 +90,11 @@ class Board {
         } catch(error) {
           if (error == 'NoAvailableNums') {
             console.log('cell' + x + y + ': No Available Nums')
-            workingCell = this.backtrack(workingCell)
           }
         }
         workingCell.displayNumber()
       }
     }
-  }
-
-  backtrack(currentCell){
-    // when a cell has no available nums, go back to the previous cell and try
-    //  a new number
-    let cellCollum = currentCell.returnCoords()[0]
-    let cellRow = currentCell.returnCoords()[1]
-    let previousCell = ''
-
-    this.notifyAdd(currentCell, currentCell.cellNumber)
-
-    if (cellRow > 0) {
-        previousCell = boardCells['cell' + cellCollum + (cellRow - 1)]
-    } else {
-      previousCell = boardCells['cell' + (cellCollum -1 ) + '9']
-    }
-
-    currentCell.undo();
-    previousCell.undo()
-
-    let workingCell = previousCell
-
-    try{
-      previousCell.chooseNumber()
-    } catch(error){
-      if (error == 'NoAvailableNums'){
-          console.log('cell' + x + y + ': No Available Nums')
-        if(workingCell != 'cell00'){
-          this.backtrack(workingCell)
-        } else{
-          console.log("Well, we're fucked")
-        }
-      }
-    }
-    return workingCell
   }
 }
 
