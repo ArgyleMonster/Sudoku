@@ -4,107 +4,113 @@
   <link rel="stylesheet" type="text/css" href="sudokuChart.css">
 </head>
 <body>
-  <table class='board'>
-  <tr>
-    <td id='00' class='leftborder upperborder'></td>
-    <td id='01' class='upperborder'></td>
-    <td id='02' class='rightborder upperborder'></td>
-    <td id='03' class='upperborder'></td>
-    <td id='04' class='upperborder'></td>
-    <td id='05' class='rightborder upperborder'></td>
-    <td id='06' class='upperborder'></td>
-    <td id='07' class='upperborder'></td>
-    <td id='08' class='rightborder upperborder'></td>
-  </tr>
-  <tr>
-    <td id='10' class="leftborder"></td>
-    <td id='11' ></td>
-    <td id='12' class='rightborder'></td>
-    <td id='13' ></td>
-    <td id='14' ></td>
-    <td id='15' class='rightborder'></td>
-    <td id='16'></td>
-    <td id='17'></td>
-    <td id='18' class="rightborder"></td>
-  </tr>
-  <tr>
-    <td id='20' class="leftborder"></td>
-    <td id='21'></td>
-    <td id='22' class='rightborder'></td>
-    <td id='23'></td>
-    <td id='24'></td>
-    <td id='25' class='rightborder'></td>
-    <td id='26'></td>
-    <td id='27'></td>
-    <td id='28' class="rightborder"></td>
-  </tr>
-  <tr>
-    <td id='30' class='leftborder upperborder'></td>
-    <td id='31' class='upperborder'></td>
-    <td id='32' class='upperborder rightborder'></td>
-    <td id='33' class='upperborder'></td>
-    <td id='34' class='upperborder'></td>
-    <td id='35' class='upperborder rightborder'></td>
-    <td id='36' class='upperborder'></td>
-    <td id='37' class='upperborder'></td>
-    <td id='38' class='rightborder upperborder'></td>
-  </tr>
-  <tr>
-    <td id='40' class="leftborder"></td>
-    <td id='41'></td>
-    <td id='42' class='rightborder'></td>
-    <td id='43'></td>
-    <td id='44'></td>
-    <td id='45' class='rightborder'></td>
-    <td id='46'></td>
-    <td id='47'></td>
-    <td id='48' class="rightborder"></td>
-  </tr>
-  <tr>
-    <td id='50' class="leftborder"></td>
-    <td id='51'></td>
-    <td id='52' class='rightborder'></td>
-    <td id='53'></td>
-    <td id='54'></td>
-    <td id='55' class='rightborder'></td>
-    <td id='56'></td>
-    <td id='57'></td>
-    <td id='58' class="rightborder"></td>
-  </tr>
-  <tr>
-    <td id='60' class='leftborder upperborder'></td>
-    <td id='61' class='upperborder'></td>
-    <td id='62' class='upperborder rightborder'></td>
-    <td id='63' class='upperborder'></td>
-    <td id='64' class='upperborder'></td>
-    <td id='65' class='upperborder rightborder'></td>
-    <td id='66' class='upperborder'></td>
-    <td id='67' class='upperborder'></td>
-    <td id='68' class='rightborder upperborder'></td>
-  </tr>
-  <tr>
-    <td id='70' class="leftborder"></td>
-    <td id='71'></td>
-    <td id='72'class='rightborder'></td>
-    <td id='73'></td>
-    <td id='74'></td>
-    <td id='75'class='rightborder'></td>
-    <td id='76'></td>
-    <td id='77'></td>
-    <td id='78'class="rightborder"></td>
-  </tr>
-  <tr>
-    <td id='80'class="leftborder bottomborder"></td>
-    <td id='81'class="bottomborder"></td>
-    <td id='82'class='rightborder bottomborder'></td>
-    <td id='83'class="bottomborder"></td>
-    <td id='84'class="bottomborder"></td>
-    <td id='85'class='rightborder bottomborder'></td>
-    <td id='86'class="bottomborder"></td>
-    <td id='87'class="bottomborder"></td>
-    <td id='88'class="rightborder bottomborder"></td>
-  </tr>
-  </table>
+  <div id='boardWrapper'>
+    <table class='board'>
+      <tr>
+        <td id='00' class='leftborder upperborder'></td>
+        <td id='01' class='upperborder'></td>
+        <td id='02' class='rightborder upperborder'></td>
+        <td id='03' class='upperborder'></td>
+        <td id='04' class='upperborder'></td>
+        <td id='05' class='rightborder upperborder'></td>
+        <td id='06' class='upperborder'></td>
+        <td id='07' class='upperborder'></td>
+        <td id='08' class='rightborder upperborder'></td>
+      </tr>
+      <tr>
+        <td id='10' class="leftborder"></td>
+        <td id='11' ></td>
+        <td id='12' class='rightborder'></td>
+        <td id='13' ></td>
+        <td id='14' ></td>
+        <td id='15' class='rightborder'></td>
+        <td id='16'></td>
+        <td id='17'></td>
+        <td id='18' class="rightborder"></td>
+      </tr>
+      <tr>
+        <td id='20' class="leftborder"></td>
+        <td id='21'></td>
+        <td id='22' class='rightborder'></td>
+        <td id='23'></td>
+        <td id='24'></td>
+        <td id='25' class='rightborder'></td>
+        <td id='26'></td>
+        <td id='27'></td>
+        <td id='28' class="rightborder"></td>
+      </tr>
+      <tr>
+        <td id='30' class='leftborder upperborder'></td>
+        <td id='31' class='upperborder'></td>
+        <td id='32' class='upperborder rightborder'></td>
+        <td id='33' class='upperborder'></td>
+        <td id='34' class='upperborder'></td>
+        <td id='35' class='upperborder rightborder'></td>
+        <td id='36' class='upperborder'></td>
+        <td id='37' class='upperborder'></td>
+        <td id='38' class='rightborder upperborder'></td>
+      </tr>
+      <tr>
+        <td id='40' class="leftborder"></td>
+        <td id='41'></td>
+        <td id='42' class='rightborder'></td>
+        <td id='43'></td>
+        <td id='44'></td>
+        <td id='45' class='rightborder'></td>
+        <td id='46'></td>
+        <td id='47'></td>
+        <td id='48' class="rightborder"></td>
+      </tr>
+      <tr>
+        <td id='50' class="leftborder"></td>
+        <td id='51'></td>
+        <td id='52' class='rightborder'></td>
+        <td id='53'></td>
+        <td id='54'></td>
+        <td id='55' class='rightborder'></td>
+        <td id='56'></td>
+        <td id='57'></td>
+        <td id='58' class="rightborder"></td>
+      </tr>
+      <tr>
+        <td id='60' class='leftborder upperborder'></td>
+        <td id='61' class='upperborder'></td>
+        <td id='62' class='upperborder rightborder'></td>
+        <td id='63' class='upperborder'></td>
+        <td id='64' class='upperborder'></td>
+        <td id='65' class='upperborder rightborder'></td>
+        <td id='66' class='upperborder'></td>
+        <td id='67' class='upperborder'></td>
+        <td id='68' class='rightborder upperborder'></td>
+      </tr>
+      <tr>
+        <td id='70' class="leftborder"></td>
+        <td id='71'></td>
+        <td id='72'class='rightborder'></td>
+        <td id='73'></td>
+        <td id='74'></td>
+        <td id='75'class='rightborder'></td>
+        <td id='76'></td>
+        <td id='77'></td>
+        <td id='78'class="rightborder"></td>
+      </tr>
+      <tr>
+        <td id='80'class="leftborder bottomborder"></td>
+        <td id='81'class="bottomborder"></td>
+        <td id='82'class='rightborder bottomborder'></td>
+        <td id='83'class="bottomborder"></td>
+        <td id='84'class="bottomborder"></td>
+        <td id='85'class='rightborder bottomborder'></td>
+        <td id='86'class="bottomborder"></td>
+        <td id='87'class="bottomborder"></td>
+        <td id='88'class="rightborder bottomborder"></td>
+      </tr>
+    </table>
+  </div>
+  <div id='buttonsWrapper'>
+    <button onclick='build()' id='Build'>Build</button>
+    <button onclick='reset()' id='Reset'>Clear</button>
+  </div>
 
   <!-- Import JavaScript to control the board -->
   <script src='../JavaScript/game.js'></script>

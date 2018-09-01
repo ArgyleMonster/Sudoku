@@ -1,7 +1,7 @@
-boardCells = [] //contains instance of all cells
+boardCells = [] //contains instance of all cells ['cell36','cell82',etc]
 buildLog = [] // log of all steps taken to create a sudoku [<cellName>,<num>]
 
-function createCells () {
+function createCells() {
   // Create instances of each cell on the board
   // From cell00(top right) to cell88(bottom left)
   // Then append them to the global boardCells array
@@ -26,7 +26,7 @@ class Board {
 
     //Tell all cells in the collumn
     for (let y = 0; y < 9; y++){
-      boardCells['cell' + this.xCoord + y].removeNumber(numberToAdd)
+      boardCells['cell' + this.xCoord + y].removeNumber(numberToRemove)
     }
 
     //Tell all cells in the box
@@ -35,7 +35,7 @@ class Board {
     this.topLeftY = this.topLeftCoords[1]
     for (let y = 0; y < 3; y++){
       for (let x = 0; x < 3; x++){
-        boardCells['cell' + this.topLeftX + this.topLeftY].removeNumber(numberToAdd)
+        boardCells['cell' + this.topLeftX + this.topLeftY].removeNumber(numberToRemove)
         this.topLeftX++
       }
       this.topLeftY++
@@ -75,13 +75,62 @@ class Board {
   clearBoard(){
     // reset the board to blank and clear cells
     for (let x = 0; x <= 8; x++){
-      for (let y = 0; y <= 8; x++){
+      for (let y = 0; y <= 8; y++){
         boardCells['cell' + x + y].reset()
       }
     }
   }
 
   createSudoku(){
+    for (let x = 0; x < 9; x++){
+      for (let y = 0; y < 9; y++){
+        let workingCell = boardCells['cell'+x+y]
+        try{
+          workingCell.chooseNumber()
+        } catch(error) {
+          if (error == 'NoAvailableNums') {
+            console.log('cell' + x + y + ': No Available Nums')
+            workingCell = this.backtrack(workingCell)
+          }
+        }
+        workingCell.displayNumber()
+      }
+    }
+  }
+
+  backtrack(currentCell){
+    // when a cell has no available nums, go back to the previous cell and try
+    //  a new number
+    let cellCollum = currentCell.returnCoords()[0]
+    let cellRow = currentCell.returnCoords()[1]
+    let previousCell = ''
+
+    this.notifyAdd(currentCell, currentCell.cellNumber)
+
+    if (cellRow > 0) {
+        previousCell = boardCells['cell' + cellCollum + (cellRow - 1)]
+    } else {
+      previousCell = boardCells['cell' + (cellCollum -1 ) + '9']
+    }
+
+    currentCell.undo();
+    previousCell.undo()
+
+    let workingCell = previousCell
+
+    try{
+      previousCell.chooseNumber()
+    } catch(error){
+      if (error == 'NoAvailableNums'){
+          console.log('cell' + x + y + ': No Available Nums')
+        if(workingCell != 'cell00'){
+          this.backtrack(workingCell)
+        } else{
+          console.log("Well, we're fucked")
+        }
+      }
+    }
+    return workingCell
   }
 }
 
@@ -93,6 +142,7 @@ class Cell extends Board{
     this.cellNumber = '' // The number to set in the cell
     this.availableNumList = [1,2,3,4,5,6,7,8,9] // Possible legal numbers for cell
     this.HTMLcell = document.getElementById('' + xCoord + yCoord)
+    this.alreadyTried = [] // List of numbers that have been tried for the cell
   }
 
   returnHTMLcell() {
@@ -120,10 +170,21 @@ class Cell extends Board{
   }
 
   returnRandomPossibleNumber(){
-    // return a single number that is possible for the cell
-    // called in chooseNumber(); do not call directly
-    let randomNum = Math.floor(Math.random() * this.availableNumList.length)
-    return this.availableNumList[randomNum]
+    let possibleNums = this.availableNumList.slice();
+
+    console.log(this.alreadyTried.length)
+
+    if (this.alreadyTried.length > 0){
+      for (let x = 0; x < this.alreadyTried.length; x++){
+        let location = possibleNums.indexOf(this.alreadyTried[x]);
+        if (location > -1) {
+            possibleNums.splice(location, 1);
+          }
+        }
+      }
+
+    var randomNum = Math.floor(Math.random() * possibleNums.length)
+    return possibleNums[randomNum]
   }
 
   removeNumber(numberToRemove) {
@@ -147,10 +208,11 @@ class Cell extends Board{
     if (this.availableNumList.length > 0){
       let numToSet = this.returnRandomPossibleNumber()
       this.cellNumber = numToSet
+      this.alreadyTried.push(numToSet)
       Board.prototype.notifyRemove(boardCells['cell' + this.xCoord + this.yCoord],numToSet)
     }
     else {
-      // No numbers are availabe for this cell will have to start over!!!!
+      throw 'NoAvailableNums'
     }
   }
 
@@ -159,19 +221,42 @@ class Cell extends Board{
       this.HTMLcell.innerHTML = this.cellNumber
     }
     else {
-      this.HTMLcell.innerHTML = 'X'
-
+      console.log("issue at: " + this.returnCoords())
     }
   }
 
   reset(){
     this.cellNumber = ''
+    this.HTMLcell.innerHTML = ''
+    this.availableNumList = [1,2,3,4,5,6,7,8,9]
+    this.alreadyTried = []
   }
+
+  undo(){
+    this.cellNumber = ''
+    this.HTMLcell.innerHTML = ''
+  }
+
 }
 
-
-
-// Run Code
-createCells()
-
 let sudoku = new Board();
+let toggle = '' // switch between last clicked buttons
+
+function build() {
+  if (toggle != 'build'){
+    toggle = 'build'
+
+     createCells()
+     sudoku.createSudoku()
+
+    }
+  }
+
+function reset() {
+  if (toggle != 'clear'){
+    toggle = 'clear'
+
+      sudoku.clearBoard()
+
+  }
+}
