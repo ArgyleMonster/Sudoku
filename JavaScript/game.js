@@ -86,7 +86,7 @@ class Board {
       for (let y = 0; y < 9; y++){
         let workingCell = boardCells['cell'+x+y]
         try{
-          workingCell.chooseNumber()
+          workingCell.pickRandomPossibleNumber()
         } catch(error) {
           if (error == 'NoAvailableNums') {
             console.log('cell' + x + y + ': No Available Nums')
@@ -107,6 +107,16 @@ class Cell extends Board{
     this.availableNumList = [1,2,3,4,5,6,7,8,9] // Possible legal numbers for cell
     this.HTMLcell = document.getElementById('' + xCoord + yCoord)
     this.alreadyTried = [] // List of numbers that have been tried for the cell
+
+    // remove numbers in alreadyTried from availableNumList
+    if (this.alreadyTried.length > 0){
+      for (let x = 0; x < this.alreadyTried.length; x++){
+        let location = availableNumList.indexOf(this.alreadyTried[x]);
+        if (location > -1) {
+            availableNumList.splice(location, 1);
+          }
+        }
+      }
   }
 
   returnHTMLcell() {
@@ -133,24 +143,6 @@ class Cell extends Board{
     return [xCoordCopy, yCoordCopy]
   }
 
-  returnRandomPossibleNumber(){
-    let possibleNums = this.availableNumList.slice();
-
-    console.log(this.alreadyTried.length)
-
-    if (this.alreadyTried.length > 0){
-      for (let x = 0; x < this.alreadyTried.length; x++){
-        let location = possibleNums.indexOf(this.alreadyTried[x]);
-        if (location > -1) {
-            possibleNums.splice(location, 1);
-          }
-        }
-      }
-
-    var randomNum = Math.floor(Math.random() * possibleNums.length)
-    return possibleNums[randomNum]
-  }
-
   removeNumber(numberToRemove) {
     //remove a number from availableNumList for this cell
     let location = this.availableNumList.indexOf(numberToRemove);
@@ -167,15 +159,17 @@ class Cell extends Board{
     }
   }
 
-  chooseNumber(){
-    // Pick a number from availableNumList and set it as the cells number
-    if (this.availableNumList.length > 0){
-      let numToSet = this.returnRandomPossibleNumber()
-      this.cellNumber = numToSet
-      this.alreadyTried.push(numToSet)
-      Board.prototype.notifyRemove(boardCells['cell' + this.xCoord + this.yCoord],numToSet)
-    }
-    else {
+  pickRandomPossibleNumber(){
+    // choose a random number from availableNumList and set it as cellNumber
+    if (this.availableNumList.length > 0) {
+      var randomNum = Math.floor(Math.random() * this.availableNumList.length)
+      this.cellNumber = this.availableNumList[randomNum]
+
+      this.alreadyTried.push(this.cellNumber)
+
+      // tell other cells to remove num from availableNumList
+      Board.prototype.notifyRemove(boardCells['cell' + this.xCoord + this.yCoord],this.cellNumber)
+    } else {
       throw 'NoAvailableNums'
     }
   }
@@ -185,7 +179,7 @@ class Cell extends Board{
       this.HTMLcell.innerHTML = this.cellNumber
     }
     else {
-      console.log("issue at: " + this.returnCoords())
+      this.HTMLcell.innerHTML = 'X'
     }
   }
 
