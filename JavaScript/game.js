@@ -1,6 +1,8 @@
 boardCells = [] //contains instance of all cells ['cell36','cell82',etc]
 buildLog = [] // log of all steps taken to create a sudoku [<cellName>,<num>]
 
+backtrackTest = 0
+
 function createCells() {
   // Create instances of each cell on the board
   // From cell00(top right) to cell88(bottom left)
@@ -82,20 +84,46 @@ class Board {
   }
 
   createSudoku(){
-    for (let x = 0; x < 9; x++){
-      for (let y = 0; y < 9; y++){
+    for (let y = 0; y < 9; y++){
+      for (let x = 0; x < 9; x++){
         let workingCell = boardCells['cell'+x+y]
         try{
           workingCell.pickRandomPossibleNumber()
         } catch(error) {
           if (error == 'NoAvailableNums') {
             console.log('cell' + x + y + ': No Available Nums')
+            console.log(workingCell.HTMLcell)
+            this.backtrack(workingCell)
           }
         }
         workingCell.displayNumber()
       }
     }
   }
+
+  backtrack(currentCell) {
+    let x = currentCell.returnCoords()[0];
+    let y = currentCell.returnCoords()[1];
+
+    if (x == 0 && y == 0) {
+    }
+    else if (x == 0 && y > 0) {
+      x=8
+      y--
+    }
+    else {
+      x--
+    }
+
+    let previousCell = boardCells['cell' + x + y]
+
+    // currentCell.undo()
+    // previousCell.undo()
+
+    console.log('avail: ' + previousCell.availableNumList)
+    console.log('tried: ' + previousCell.alreadyTried)
+  }
+
 }
 
 class Cell extends Board{
@@ -178,9 +206,6 @@ class Cell extends Board{
     if (this.cellNumber !=''){
       this.HTMLcell.innerHTML = this.cellNumber
     }
-    else {
-      this.HTMLcell.innerHTML = 'X'
-    }
   }
 
   reset(){
@@ -191,6 +216,7 @@ class Cell extends Board{
   }
 
   undo(){
+    Board.prototype.notifyAdd(boardCells['cell' + this.xCoord + this.yCoord],this.cellNumber)
     this.cellNumber = ''
     this.HTMLcell.innerHTML = ''
   }
