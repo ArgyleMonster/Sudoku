@@ -118,10 +118,13 @@ class Board {
     let previousCell = boardCells['cell' + x + y]
 
     // currentCell.undo()
-    // previousCell.undo()
+    // console.log('\n')
+    // console.log(previousCell.availableNumList)
+    previousCell.undo()
+    // console.log(previousCell.availableNumList)
 
-    console.log('avail: ' + previousCell.availableNumList)
-    console.log('tried: ' + previousCell.alreadyTried)
+    // console.log('avail: ' + previousCell.availableNumList)
+    // console.log('tried: ' + previousCell.alreadyTried)
   }
 
 }
@@ -142,9 +145,9 @@ class Cell extends Board{
         let location = availableNumList.indexOf(this.alreadyTried[x]);
         if (location > -1) {
             availableNumList.splice(location, 1);
-          }
         }
       }
+    }
   }
 
   returnHTMLcell() {
@@ -189,6 +192,7 @@ class Cell extends Board{
 
   pickRandomPossibleNumber(){
     // choose a random number from availableNumList and set it as cellNumber
+    // console.log('pickingnum cell' + this.returnCoords() + ':' + this.availableNumList)
     if (this.availableNumList.length > 0) {
       var randomNum = Math.floor(Math.random() * this.availableNumList.length)
       this.cellNumber = this.availableNumList[randomNum]
@@ -197,6 +201,7 @@ class Cell extends Board{
 
       // tell other cells to remove num from availableNumList
       Board.prototype.notifyRemove(boardCells['cell' + this.xCoord + this.yCoord],this.cellNumber)
+      // console.log('numChosen: ' + this.cellNumber)
     } else {
       throw 'NoAvailableNums'
     }
