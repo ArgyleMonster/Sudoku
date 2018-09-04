@@ -93,7 +93,9 @@ class Board {
           if (error == 'NoAvailableNums') {
             console.log('cell' + x + y + ': No Available Nums')
             console.log(workingCell.HTMLcell)
-            this.backtrack(workingCell)
+            let lastEditedCell = this.backtrack(workingCell)
+            x = lastEditedCell[0]
+            y = lastEditedCell[1]
           }
         }
         workingCell.displayNumber()
@@ -101,9 +103,9 @@ class Board {
     }
   }
 
-  backtrack(currentCell) {
-    let x = currentCell.returnCoords()[0];
-    let y = currentCell.returnCoords()[1];
+  getPreviousCell(currentCell) {
+    let x = currentCell.returnCoords()[0]
+    let y = currentCell.returnCoords()[1]
 
     if (x == 0 && y == 0) {
     }
@@ -115,16 +117,27 @@ class Board {
       x--
     }
 
-    let previousCell = boardCells['cell' + x + y]
+    return boardCells['cell' + x + y]
+  }
 
-    // currentCell.undo()
-    // console.log('\n')
-    // console.log(previousCell.availableNumList)
+  backtrack(currentCell) {
+    backtrackTest++
+    if (backtrackTest > 200) {
+      return
+    }
+    let previousCell = this.getPreviousCell(currentCell)
+
     previousCell.undo()
-    // console.log(previousCell.availableNumList)
 
-    // console.log('avail: ' + previousCell.availableNumList)
-    // console.log('tried: ' + previousCell.alreadyTried)
+    try {
+      previousCell.pickRandomPossibleNumber()
+    } catch (error) {
+      if (error == 'NoAvailableNums') {
+        this.backtrack(previousCell)
+      }
+    }
+    // return previousCell.returnCoords()
+    return this.getPreviousCell(previousCell).returnCoords()
   }
 
 }
@@ -138,16 +151,6 @@ class Cell extends Board{
     this.availableNumList = [1,2,3,4,5,6,7,8,9] // Possible legal numbers for cell
     this.HTMLcell = document.getElementById('' + xCoord + yCoord)
     this.alreadyTried = [] // List of numbers that have been tried for the cell
-
-    // remove numbers in alreadyTried from availableNumList
-    if (this.alreadyTried.length > 0){
-      for (let x = 0; x < this.alreadyTried.length; x++){
-        let location = availableNumList.indexOf(this.alreadyTried[x]);
-        if (location > -1) {
-            availableNumList.splice(location, 1);
-        }
-      }
-    }
   }
 
   returnHTMLcell() {
@@ -191,6 +194,11 @@ class Cell extends Board{
   }
 
   pickRandomPossibleNumber(){
+    // remove numbers from availableNumList that are in alreadyTried
+    this.availableNumList = this.availableNumList.filter(triedNums => {
+      return !(this.alreadyTried.includes(triedNums))
+    })
+
     // choose a random number from availableNumList and set it as cellNumber
     // console.log('pickingnum cell' + this.returnCoords() + ':' + this.availableNumList)
     if (this.availableNumList.length > 0) {
