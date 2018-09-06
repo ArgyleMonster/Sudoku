@@ -88,6 +88,7 @@ class Board {
       for (let x = 0; x < 9; x++){
         let workingCell = boardCells['cell'+x+y]
         try{
+          console.log('Currently working on: cell' + x + y )
           workingCell.pickRandomPossibleNumber()
         } catch(error) {
           if (error == 'NoAvailableNums') {
@@ -121,22 +122,38 @@ class Board {
   }
 
   backtrack(currentCell) {
+    console.log('\n')
+    console.log("currentCell: cell" + currentCell.returnCoords(0))
     backtrackTest++
-    if (backtrackTest > 200) {
+    if (backtrackTest > 10) {
       return
     }
     let previousCell = this.getPreviousCell(currentCell)
+    console.log("previousCell: cell" + previousCell.returnCoords())
 
+    console.log('previousCell number: ' + previousCell.HTMLcell.innerHTML)
+
+    console.log('availableNumList is: ' + previousCell.availableNumList)
     previousCell.undo()
+    console.log('undo: cell' + previousCell.returnCoords())
+    console.log('alreadyTried is now: ' + previousCell.alreadyTried)
 
     try {
+      console.log('Picking Random Number: cell' + previousCell.returnCoords())
+      console.log(previousCell.returnCoords() + ' Avail nums: ' + previousCell.availableNumList)
       previousCell.pickRandomPossibleNumber()
+      console.log('AvailableNumList is now: ' + previousCell.availableNumList)
+      console.log('choosen number: ' + previousCell.cellNumber)
     } catch (error) {
+      console.log('No Available Numbs for Previous Cell')
       if (error == 'NoAvailableNums') {
+        console.log('backtrack previous: ' + previousCell.returnCoords())
         this.backtrack(previousCell)
       }
     }
     // return previousCell.returnCoords()
+    console.log('Return previous cell: ' + previousCell.returnCoords())
+    console.log('\n')
     return this.getPreviousCell(previousCell).returnCoords()
   }
 
@@ -195,9 +212,8 @@ class Cell extends Board{
 
   pickRandomPossibleNumber(){
     // remove numbers from availableNumList that are in alreadyTried
-    this.availableNumList = this.availableNumList.filter(triedNums => {
-      return !(this.alreadyTried.includes(triedNums))
-    })
+    this.removeTriedFromAvail()
+    console.log('picking; availableNumList: ' + this.availableNumList)
 
     // choose a random number from availableNumList and set it as cellNumber
     // console.log('pickingnum cell' + this.returnCoords() + ':' + this.availableNumList)
@@ -234,6 +250,12 @@ class Cell extends Board{
     this.HTMLcell.innerHTML = ''
   }
 
+  removeTriedFromAvail(){
+    // remove all numbers in alreadyTried from availableNumList
+    this.availaVVbleNumList = this.availableNumList.filter(triedNums => {
+      return !(this.alreadyTried.includes(triedNums))
+    })
+  }
 }
 
 let sudoku = new Board();
